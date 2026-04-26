@@ -27,21 +27,24 @@ mixin _$ThemeStore on _ThemeStoreBase, Store {
     });
   }
 
-  late final _$_ThemeStoreBaseActionController = ActionController(
-    name: '_ThemeStoreBase',
+  late final _$initAsyncAction = AsyncAction(
+    '_ThemeStoreBase.init',
     context: context,
   );
 
   @override
-  void setThemeMode(AppThemeMode mode) {
-    final _$actionInfo = _$_ThemeStoreBaseActionController.startAction(
-      name: '_ThemeStoreBase.setThemeMode',
-    );
-    try {
-      return super.setThemeMode(mode);
-    } finally {
-      _$_ThemeStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
+  late final _$setThemeModeAsyncAction = AsyncAction(
+    '_ThemeStoreBase.setThemeMode',
+    context: context,
+  );
+
+  @override
+  Future<void> setThemeMode(AppThemeMode mode) {
+    return _$setThemeModeAsyncAction.run(() => super.setThemeMode(mode));
   }
 
   @override

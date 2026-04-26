@@ -33,8 +33,14 @@ void setupDependencies() {
   );
 }
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupDependencies();
+  
+  // Inicialização assíncrona das stores para carregar persistência
+  await getIt<ThemeStore>().init();
+  await getIt<UserStore>().init();
+  
   runApp(const RoutineFlowApp());
 }
 
@@ -49,6 +55,7 @@ class RoutineFlowApp extends StatelessWidget {
       builder: (_) {
         return MaterialApp(
           title: 'RoutineFlow',
+          debugShowCheckedModeBanner: false,
           theme: AppTheme.getTheme(themeStore.currentMode),
           home: DashboardScreen(
             controller: getIt<RoutineController>(),

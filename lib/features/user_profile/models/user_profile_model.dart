@@ -10,6 +10,7 @@ class UserProfile {
   final int defaultWorkHours;
   final int currentStreak;
   final DateTime? lastUpdateDate;
+  final String? profileImageUrl;
 
   UserProfile({
     required this.id,
@@ -18,6 +19,7 @@ class UserProfile {
     this.defaultWorkHours = 0,
     this.currentStreak = 0,
     this.lastUpdateDate,
+    this.profileImageUrl,
   });
 
   UserProfile copyWith({
@@ -26,6 +28,7 @@ class UserProfile {
     int? defaultWorkHours,
     int? currentStreak,
     DateTime? lastUpdateDate,
+    String? profileImageUrl,
   }) {
     return UserProfile(
       id: id,
@@ -34,6 +37,7 @@ class UserProfile {
       defaultWorkHours: defaultWorkHours ?? this.defaultWorkHours,
       currentStreak: currentStreak ?? this.currentStreak,
       lastUpdateDate: lastUpdateDate ?? this.lastUpdateDate,
+      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
     );
   }
 }
