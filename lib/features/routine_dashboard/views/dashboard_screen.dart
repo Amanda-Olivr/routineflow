@@ -8,6 +8,9 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_store.dart';
 import '../../user_profile/stores/user_store.dart';
 import '../../user_profile/models/user_profile_model.dart';
+import '../../pomodoro/views/pomodoro_screen.dart';
+import '../../planner/views/weekly_planner_screen.dart';
+
 
 class DashboardScreen extends StatefulWidget {
   final RoutineController controller;
@@ -136,6 +139,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     final session = widget.store.todaySessions[index];
                     return _buildSessionCard(context, session);
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const PomodoroScreen()),
+                      );
+                    },
+                    icon: const Icon(Icons.timer),
+                    label: const Text('Iniciar Foco (Pomodoro)'),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      backgroundColor: theme.primaryColor,
+                      foregroundColor: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -314,6 +341,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.calendar_month_outlined, color: theme.primaryColor),
+            title: Text('Planner Semanal', style: theme.textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WeeklyPlannerScreen()),
+              );
+            },
+          ),
+          const Divider(),
           ListTile(
             title: Text('Perfil', style: theme.textTheme.titleLarge),
           ),
